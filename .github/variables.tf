@@ -8,12 +8,13 @@ variable "github_token" {
 variable "repo_name" {
   description = "Repo Name"
   type        = string
+  default     = "Terraform-Test-Repo"
 }
 
 variable "branches" {
   description = "List of branches to create"
   type        = list(string)
-  default     = ["main"]  # Default value
+  default     = ["main", "dev", "stage"]
 }
 
 variable "members_file" {
