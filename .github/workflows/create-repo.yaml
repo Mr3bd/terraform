@@ -22,8 +22,15 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Debug GitHub Token
-        run: echo "Token length: ${#G_TOKEN}"
-        
+        run: |
+          if [[ -z "${G_TOKEN}" ]]; then 
+            echo "G_TOKEN is EMPTY or NOT SET!";
+          else 
+            echo "G_TOKEN is SET, length: $(echo -n ${G_TOKEN} | wc -c)";
+          fi
+        env:
+          G_TOKEN: ${{ secrets.G_TOKEN }}
+
       - name: Terraform Init
         run: terraform init
         working-directory: github
