@@ -2,7 +2,6 @@ variable "G_TOKEN" {
   description = "GitHub personal access token"
   type        = string
   sensitive   = true
-  default = "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"
 }
 
 variable "github_owner" {
