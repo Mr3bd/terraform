@@ -19,7 +19,7 @@ variable "repository_name" {
 variable "repository_members" {
   description = "List of GitHub usernames to add as members"
   type        = list(string)
-  default     = ["Mr3bd"]
+  default     = ["Mr3bd", "fayezgh"]
 }
 
 variable "repository_branches" {
