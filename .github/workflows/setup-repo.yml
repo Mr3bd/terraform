@@ -1,4 +1,4 @@
-name: Add Members
+name: Setup Repo
 
 on:
   push:
