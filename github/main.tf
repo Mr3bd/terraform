@@ -10,7 +10,6 @@ resource "github_repository" "repo" {
   auto_init   = true
 
   lifecycle {
-    ignore_changes = [name]
     create_before_destroy = true
   }
 }

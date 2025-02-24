@@ -33,13 +33,27 @@ jobs:
         run: terraform init
         working-directory: github
 
+      - name: Check for Repository Name Change
+        id: check_repo_name
+        run: |
+          if git diff --exit-code HEAD^ HEAD -- github/variables.tf; then
+            echo "Repository name unchanged"
+            echo "REPO_NAME_CHANGED=false" >> $GITHUB_ENV
+          else
+            echo "Repository name changed"
+            echo "REPO_NAME_CHANGED=true" >> $GITHUB_ENV
+          fi
+          
+      - name: Taint Repository Resource (if name changed)
+        if: env.REPO_NAME_CHANGED == 'true'
+        run: terraform taint github_repository.repo
+
       - name: Terraform Plan
-        run: terraform plan -var "G_TOKEN=${{ secrets.G_TOKEN }}"
+        run: terraform plan -var "G_TOKEN=${{ secrets.G_TOKEN }}" -var "github_owner=${{ secrets.GITHUB_OWNER }}" -var "repository_name=${{ secrets.REPO_NAME }}" -var "repository_members=${{ secrets.REPO_MEMBERS }}" -var "repository_branches=${{ secrets.REPO_BRANCHES }}"
         working-directory: github
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var "G_TOKEN=${{ secrets.G_TOKEN }}"
+        run: terraform apply -auto-approve -var "G_TOKEN=${{ secrets.G_TOKEN }}" -var "github_owner=${{ secrets.GITHUB_OWNER }}" -var "repository_name=${{ secrets.REPO_NAME }}" -var "repository_members=${{ secrets.REPO_MEMBERS }}" -var "repository_branches=${{ secrets.REPO_BRANCHES }}"
         working-directory: github
         env:
           G_TOKEN: ${{ secrets.G_TOKEN }}
-
