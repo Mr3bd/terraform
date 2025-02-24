@@ -1,4 +1,5 @@
 name: Create Repository
+
 on:
   push:
     paths:
@@ -23,13 +24,11 @@ jobs:
 
       - name: Debug GitHub Token
         run: |
-          if [[ -z "${G_TOKEN}" ]]; then 
+          if [[ -z "${{ secrets.G_TOKEN }}" ]]; then 
             echo "G_TOKEN is EMPTY or NOT SET!";
           else 
-            echo "G_TOKEN is SET, length: $(echo -n ${G_TOKEN} | wc -c)";
+            echo "G_TOKEN is SET, length: $(echo -n ${{ secrets.G_TOKEN }} | wc -c)";
           fi
-        env:
-          G_TOKEN: ${{ secrets.G_TOKEN }}
 
       - name: Terraform Init
         run: terraform init
@@ -37,18 +36,16 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan \
-          -var "github_token=${{ secrets.G_TOKEN }}" \
-          -var "github_owner=Mr3bd" \
-          -var "repository_name=myrepo44" \
-          -var "repository_members=['user1', 'user2']" \
-          -var "repository_branches=['branch1', 'branch2']"
+          -var "G_TOKEN=${{ secrets.G_TOKEN }}" \
+          -var "github_owner=${{ secrets.GITHUB_OWNER }}" \
+          -var "repository_name=${{ secrets.REPO_NAME }}"
         working-directory: github
 
       - name: Terraform Apply
         run: terraform apply -auto-approve \
-          -var "github_token=${{ secrets.G_TOKEN }}" \
-          -var "github_owner=Mr3bd" \
-          -var "repository_name=myrepo44" \
-          -var "repository_members=['user1', 'user2']" \
-          -var "repository_branches=['branch1', 'branch2']"
+          -var "G_TOKEN=${{ secrets.G_TOKEN }}" \
+          -var "github_owner=${{ secrets.GITHUB_OWNER }}" \
+          -var "repository_name=${{ secrets.REPO_NAME }}"
         working-directory: github
+        env:
+          G_TOKEN: ${{ secrets.G_TOKEN }}
