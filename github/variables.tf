@@ -25,5 +25,5 @@ variable "repository_members" {
 variable "repository_branches" {
   description = "List of branches to create"
   type        = list(string)
-  default     = ["dev"]
+  default     = ["x"]
 }
