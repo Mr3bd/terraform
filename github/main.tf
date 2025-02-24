@@ -10,9 +10,8 @@ resource "github_repository" "repo" {
   auto_init   = true
 
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
-
 }
 
 resource "github_repository_collaborator" "collaborator" {
