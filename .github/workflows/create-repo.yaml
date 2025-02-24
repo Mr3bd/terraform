@@ -37,15 +37,15 @@ jobs:
       - name: Terraform Plan
         run: terraform plan \
           -var "G_TOKEN=${{ secrets.G_TOKEN }}" \
-          -var "github_owner=${{ secrets.GITHUB_OWNER }}" \
-          -var "repository_name=${{ secrets.REPO_NAME }}"
+          -var "github_owner=${{ secrets.github_owner }}" \
+          -var "repository_name=${{ secrets.repository_name }}"
         working-directory: github
 
       - name: Terraform Apply
         run: terraform apply -auto-approve \
           -var "G_TOKEN=${{ secrets.G_TOKEN }}" \
-          -var "github_owner=${{ secrets.GITHUB_OWNER }}" \
-          -var "repository_name=${{ secrets.REPO_NAME }}"
+          -var "github_owner=${{ secrets.github_owner }}" \
+          -var "repository_name=${{ secrets.repository_name }}"
         working-directory: github
         env:
           G_TOKEN: ${{ secrets.G_TOKEN }}
