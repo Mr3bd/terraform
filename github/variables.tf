@@ -7,6 +7,7 @@ variable "G_TOKEN" {
 variable "github_owner" {
   description = "GitHub organization or user"
   type        = string
+  default = "Mr3bd"
 }
 
 variable "repository_name" {
