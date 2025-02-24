@@ -38,7 +38,7 @@ jobs:
           -var "G_TOKEN=${{ secrets.G_TOKEN }}" \
           -var "github_owner=${{ secrets.github_owner }}" \
           -var "repository_name=${{ secrets.repository_name }}" \
-          -var "repository_branches=${{ secrets.repository_branches }}"
+          # -var "repository_branches=${{ secrets.repository_branches }}"
         working-directory: github
 
       - name: Terraform Apply
@@ -46,7 +46,7 @@ jobs:
           -var "G_TOKEN=${{ secrets.G_TOKEN }}" \
           -var "github_owner=${{ secrets.github_owner }}" \
           -var "repository_name=${{ secrets.repository_name }}" \
-          -var "repository_branches=${{ secrets.repository_branches }}"
+          # -var "repository_branches=${{ secrets.repository_branches }}"
         working-directory: github
         env:
           G_TOKEN: ${{ secrets.G_TOKEN }}

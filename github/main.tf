@@ -12,12 +12,12 @@ resource "github_repository" "repo" {
 }
 
 # Add members to the repository
-resource "github_repository_collaborator" "collaborator" {
-  for_each   = toset(var.repository_members)
-  repository = github_repository.repo.name
-  username   = each.value
-  permission = "push"
-}
+#resource "github_repository_collaborator" "collaborator" {
+#  for_each   = toset(var.repository_members)
+#  repository = github_repository.repo.name
+#  username   = each.value
+#  permission = "push"
+#}
 
 # Create branches
 resource "github_branch" "branch" {
