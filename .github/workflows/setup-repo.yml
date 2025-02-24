@@ -47,6 +47,7 @@ jobs:
       - name: Taint Repository Resource (if name changed)
         if: env.REPO_NAME_CHANGED == 'true'
         run: terraform taint github_repository.repo
+        working-directory: github
 
       - name: Terraform Plan
         run: terraform plan -var "G_TOKEN=${{ secrets.G_TOKEN }}"
