@@ -35,11 +35,11 @@ jobs:
         working-directory: github
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -var github_token=${{ secrets.G_TOKEN }} -var github_owner=${{ secrets.GITHUB_OWNER }} -var repository_name=${{ secrets.REPO_NAME }} -var repository_members=${{ secrets.REPO_MEMBERS }} -var repository_branches=${{ secrets.REPO_BRANCHES }}
         working-directory: github
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var github_token=${{ secrets.G_TOKEN }} -var github_owner=${{ secrets.GITHUB_OWNER }} -var repository_name=${{ secrets.REPO_NAME }} -var repository_members=${{ secrets.REPO_MEMBERS }} -var repository_branches=${{ secrets.REPO_BRANCHES }}
         working-directory: github
         env:
           G_TOKEN: ${{ secrets.G_TOKEN }}
