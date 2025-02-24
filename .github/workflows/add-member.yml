@@ -2,17 +2,14 @@ name: Add Members
 on:
   push:
     paths:
-      - 'github/main.tf'
-      - 'github/variables.tf'
+      - 'github/variables.tf'  # Members are likely defined in variables.tf
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Navigate to Terraform directory
-        run: cd github
 
       - name: Print working directory (for debugging)
         run: pwd
@@ -25,11 +22,14 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        working-directory: github
 
       - name: Terraform Plan
         run: terraform plan
+        working-directory: github
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        working-directory: github
         env:
           G_TOKEN: ${{ secrets.G_TOKEN }}
