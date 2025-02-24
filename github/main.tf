@@ -8,6 +8,11 @@ resource "github_repository" "repo" {
   description = "A new repository created with Terraform"
   visibility  = "private"
   auto_init   = true
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
 }
 
 resource "github_repository_collaborator" "collaborator" {

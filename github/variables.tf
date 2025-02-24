@@ -13,7 +13,7 @@ variable "github_owner" {
 variable "repository_name" {
   description = "Name of the repository to create"
   type        = string
-  default     = "MyNewRepo1433"
+  default     = "MyNewRepo14336"
 }
 
 variable "repository_members" {
