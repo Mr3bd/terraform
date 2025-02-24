@@ -12,6 +12,12 @@ jobs:
 
       - name: Navigate to Terraform directory
         run: cd github
+
+      - name: Print working directory (for debugging)
+        run: pwd
+
+      - name: List directory contents (for debugging)
+        run: ls -R
         
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
