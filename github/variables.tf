@@ -7,13 +7,12 @@ variable "G_TOKEN" {
 variable "github_owner" {
   description = "GitHub organization or user"
   type        = string
-  default = "Mr3bd"
 }
 
 variable "repository_name" {
   description = "Name of the repository to create"
   type        = string
-  default     = "MyNewRepo667"
+  default     = "MyNewRepo"
 }
 
 variable "repository_members" {

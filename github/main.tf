@@ -1,11 +1,11 @@
 provider "github" {
-  token = var.G_TOKEN        # This should be the GitHub personal access token
-  owner = var.github_owner   # GitHub organization or user
+  token = var.G_TOKEN
+  owner = var.github_owner
 }
 
 # Create a new repository
 resource "github_repository" "repo" {
-  name        = var.repository_name   # Name of the repository to create
+  name        = var.repository_name
   description = "A new repository created with Terraform"
   visibility  = "private"
   auto_init   = true
@@ -13,16 +13,16 @@ resource "github_repository" "repo" {
 
 # Add members to the repository
 resource "github_repository_collaborator" "collaborator" {
-  for_each   = toset(var.repository_members)  # List of GitHub usernames to add
-  repository = github_repository.repo.name    # The repository created above
+  for_each   = toset(var.repository_members)
+  repository = github_repository.repo.name
   username   = each.value
-  permission = "push"                         # Permissions (e.g., "push")
+  permission = "push"
 }
 
 # Create branches
 resource "github_branch" "branch" {
-  for_each      = toset(var.repository_branches)  # List of branches to create
-  repository    = github_repository.repo.name    # The repository created above
+  for_each      = toset(var.repository_branches)
+  repository    = github_repository.repo.name
   branch        = each.value
-  source_branch = "main"  # Default branch to create new branches from
+  source_branch = "main" # Default branch to create new branches from
 }
