@@ -12,10 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print working directory (for debugging)
+      - name: Print working directory
         run: pwd
 
-      - name: List directory contents (for debugging)
+      - name: List directory contents
         run: ls -R
 
       - name: Set up Terraform
